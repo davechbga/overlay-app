@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
+// Define a function to handle image download.
 function handleDownload() {
   const canvas = document.querySelector("canvas");
   const imageDataURL = canvas.toDataURL("image/png");
@@ -8,7 +9,9 @@ function handleDownload() {
   downloadLink.href = imageDataURL;
 }
 
+// Define the Canvas component as a function.
 function Canvas({
+  // Define the props and their types.
   backgroundImage,
   vectorImage,
   overlayX,
@@ -18,30 +21,40 @@ function Canvas({
   overlayTransparency,
   filterType,
 }) {
+  // Create a mutable reference to the canvas element using useRef.
   const canvasRef = useRef(null);
 
+  // useEffect is used to run code when certain dependencies change
   useEffect(() => {
+    // Check if backgroundImage or vectorImage is not defined and return if so.
     if (!backgroundImage || !vectorImage) return;
 
+    // Get the 2D context of the canvas using the reference.
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
+    // Clear the current content of the canvas.
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Load the background image into an Image object and set an onload event.
     const background = new Image();
     background.src = URL.createObjectURL(backgroundImage);
 
     background.onload = () => {
+      // Load the vector image in a similar way.
       const vector = new Image();
       vector.src = URL.createObjectURL(vectorImage);
       vector.onload = () => {
+        // Create a temporary canvas to apply filters.
         const tempCanvas = document.createElement("canvas");
         tempCanvas.width = canvas.width;
         tempCanvas.height = canvas.height;
-        const tempCtx = tempCanvas.getContext("2d");
 
+        // Draw the background image on the temporary canvas.
+        const tempCtx = tempCanvas.getContext("2d");
         tempCtx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
+        // Apply a filter (grayscale or sepia) based on filterType.
         if (filterType === "grayscale") {
           const imageData = tempCtx.getImageData(
             0,
@@ -91,13 +104,17 @@ function Canvas({
           tempCtx.putImageData(imageData, 0, 0);
         }
 
+        // Draw the temporary canvas on the main canvas.
         ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+
+        // Apply transparency and overlay the vector image.
         ctx.globalAlpha = overlayTransparency / 100;
         ctx.drawImage(vector, overlayX, overlayY, overlayWidth, overlayHeight);
         ctx.globalAlpha = 1;
       };
     };
   }, [
+    // Set the dependencies for the effect.
     backgroundImage,
     vectorImage,
     overlayX,
@@ -114,7 +131,7 @@ function Canvas({
         className="p-5"
         ref={canvasRef}
         width={1280}
-        height={720}
+        height={1280}
       ></canvas>
       <div className="text-center p-4">
         <a
@@ -130,6 +147,7 @@ function Canvas({
   );
 }
 
+// Define the expected properties and their types using PropTypes.
 Canvas.propTypes = {
   backgroundImage: PropTypes.object,
   vectorImage: PropTypes.object,
