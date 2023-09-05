@@ -4,7 +4,7 @@ Welcome to the Overlay App! This application allows you to overlay a logo on an 
 
 ## Demo
 
-You can try out the Overlay App [here](https://overlay-logo.netlify.app/).
+You can try out the Overlay App [go](https://overlay-logo.netlify.app/).
 
 ## Technologies
 
