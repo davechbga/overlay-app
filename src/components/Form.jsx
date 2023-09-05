@@ -36,7 +36,7 @@ function Form({ onOverlay }) {
             />
           </div>
           <div className="form-group mt-3">
-            <label htmlFor="overlayX">Posición X de superposición:</label>
+            <label htmlFor="overlayX">Overlay Position X:</label>
             <input
               className="form-control mb-2"
               type="number"
@@ -46,7 +46,7 @@ function Form({ onOverlay }) {
             />
           </div>
           <div className="form-group mt-3">
-            <label htmlFor="overlayY">Posición Y de superposición:</label>
+            <label htmlFor="overlayY">Overlay Position Y:</label>
             <input
               className="form-control mb-2"
               type="number"
@@ -77,7 +77,7 @@ function Form({ onOverlay }) {
           </div>
           <div className="form-group mt-3">
             <label htmlFor="overlayTransparency">
-              Transparencia de superposición (0-100):
+              Overlay Transparency (0-100):
             </label>
             <input
               className="form-control-range mb-2"
