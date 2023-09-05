@@ -133,7 +133,8 @@ function Canvas({
         width={1280}
         height={1280}
       ></canvas>
-      <div className="text-center p-4">
+
+      <div className="text-center mb-5">
         <a
           className="btn btn-success"
           id="downloadLink"

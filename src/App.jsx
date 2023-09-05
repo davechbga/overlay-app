@@ -3,6 +3,7 @@ import Form from "./components/Form";
 import Canvas from "./components/Canvas";
 import { useState } from "react";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   const [overlayOptions, setOverlayOptions] = useState({});
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <Form onOverlay={setOverlayOptions} />
       <Canvas {...overlayOptions} />
+      <Footer />
     </div>
   );
 }
